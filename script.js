@@ -8,21 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const error1 = document.getElementById('error1');
     const error2 = document.getElementById('error2');
     const generalError = document.getElementById('generalError');
+    
+    if (!num1Input || !num2Input || !operationSelect || !calculateBtn || 
+        !resultField || !previousOperations || !error1 || !error2 || !generalError) {
+        console.error('Ошибка: не все элементы найдены на странице');
+        return; 
+    }
 
     let history = [];
-
-    function validateInput(e) {
-        this.value = this.value.replace(/[^0-9.-]/g, '');
-        
-        if (this.value.split('-').length > 2) {
-            this.value = this.value.replace(/-/g, '');
-        }
-        
-        let parts = this.value.split('.');
-        if (parts.length > 2) {
-            this.value = parts[0] + '.' + parts.slice(1).join('').replace(/\./g, '');
-        }
-    }
 
     function showError(input, message) {
         input.classList.add('error');
@@ -118,17 +111,16 @@ document.addEventListener('DOMContentLoaded', function() {
         resultField.textContent = resultString;
     }
 
-    num1Input.addEventListener('input', validateInput);
-    num2Input.addEventListener('input', validateInput);
-    
     num1Input.addEventListener('input', function() {
         this.classList.remove('error');
         error1.textContent = '';
+        generalError.textContent = '';
     });
     
     num2Input.addEventListener('input', function() {
         this.classList.remove('error');
         error2.textContent = '';
+        generalError.textContent = '';
     });
     
     calculateBtn.addEventListener('click', calculate);
