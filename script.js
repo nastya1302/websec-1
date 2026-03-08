@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (!Number.isInteger(result)) {
-            result = result.toFixed(2);
+            result = result.toFixed(10);
         }
         
         const resultString = `${num1} ${operation} ${num2} = ${result}`;
